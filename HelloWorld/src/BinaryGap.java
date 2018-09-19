@@ -5,41 +5,26 @@ public class BinaryGap {
         System.out.print(binaryGap);
     }
     public static int solution(int N){
-        StringBuffer buffer= getBinary(N);
-        System.out.println(buffer);
-        boolean findStart= false;
-        int maxLength=0;
-        int currentLength=0;
-        for (int i = 0; i < buffer.length(); i++) {
-            if(buffer.charAt(i)=='1'){
-                if(findStart){
-                    if(maxLength<currentLength){
-                        maxLength=currentLength;
-                    }
-                    currentLength=0;
-                }else {
-                    findStart = true;
-                    maxLength = 0;
-                    currentLength=0;
+        boolean hasFirstDigit = false;
+        int maxLength = 0;
+        int length = 0;
+        while (N>0){
+            int digit = N%2;
+            if(digit ==1){
+                if(hasFirstDigit){
+                    maxLength = length>maxLength?length:maxLength;
+                    length = 0;
+                }else{
+                    hasFirstDigit = true;
                 }
-            }else if (buffer.charAt(i)=='0'){
-                if(findStart){
-                    currentLength++;
-                }else {
-                    currentLength=0;
+            }else {
+                if(hasFirstDigit){
+                    length++;
                 }
-
             }
+            N=N>>1;
         }
         return maxLength;
     }
-    public static StringBuffer getBinary(int N){
-        StringBuffer buffer=new StringBuffer();
-        while (N>0){
-            buffer.append(N%2);
-            N=N>>1;
-        }
-        return buffer;
 
-    }
 }
