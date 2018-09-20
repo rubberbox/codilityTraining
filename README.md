@@ -1,4 +1,4 @@
-# codilityTraining
+# codility上的一些Lesson
 
 README
 ===========================
